@@ -53,9 +53,41 @@ int main() {
 		printf("%d ",a[i]);
 	printf("\n");
 	printf("hello world!");
+	fclose(stdin);
+	fclose(stdout);
 	return 0;
 } 
 ```
+
+
+
+---
+
+
+
+​	至于关于C语言的编译过程，我在网上搜索了相关教程，并配置了GCC环境
+
+​	首先我通过`gcc -E test.c -o test.i`进行预处理，生成了test.i源文件，我理解这部分主要是把一些头文件给调入进来
+
+​	然后我通过`gcc -S test.i -o test.s`将源文件转换为汇编语言
+
+​	然后我通过`gcc -c test.s -o test.o`得到了目标文件
+
+​	最后我通过`gcc test.o -o test`通过链接得到了可执行文件
+
+
+
+### LEVEL 1-1
+
+​	就是用一些基础的语法吧
+
+
+
+### LEVEL 1-2
+
+​	关于输出格式的说明：和level1-1的官方版本一样，输出了所有重要时刻，每行三个数字，分别表示电梯停靠楼层，电梯已经运行的时间，电梯内的人数。
+
+​	对于文本输入输出，输入文件名是`level1_2.in` ，输出文件名是`level1_2.out`
 
 
 
