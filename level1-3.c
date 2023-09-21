@@ -48,13 +48,13 @@ int gt(int x) {
 		return a[x].en;	
 }
 
-int fd(int x,int dic) {
+int fd(int x,int dic,int cap) {
 	int k;
 	for (k=1; k<=n; k++)
 		if (a[k].en == x && b[k] == 1)
 			return k;
 	for (k=1; k<=n; k++)
-		if (a[k].st == x && b[k] == 0 && (a[k].en - a[k].st) * dic > 0)
+		if (cap < 4 && a[k].st == x && b[k] == 0)
 			return k;
 	return -1;
 }
@@ -82,7 +82,7 @@ int main() {
 	int tcnt = 0;
 	for (; cnt; est += dic) {
 		tcnt ++;
-		int resl = fd(est,dic);
+		int resl = fd(est,dic,cap);
 		while (resl != -1) {
 			if (b[resl] == 1) {
 				b[resl] = 2;
@@ -90,15 +90,13 @@ int main() {
 				printf("%d %d %d\n",est,tcnt,cap);
 			}
 			if (b[resl] == 0) {
-				if (cap == 10)
+				if (cap == 4)
 					continue;
-				if ((a[resl].en - a[resl].st) * dic < 0)
-					continue; // optimization 
 				cap++; cnt--;
 				b[resl] = 1;
 				printf("%d %d %d\n",est,tcnt,cap); 
 			}
-			resl = fd(est,dic);
+			resl = fd(est,dic,cap);
 		}
 		maxx = s_maxx();
 		minn = s_minn(); 
