@@ -16,7 +16,7 @@
 >
 >   ($git status可以对文件进行状态的查询)
 >
->3. $git remote add origin url 连接远程仓库
+>3. $git remote add origin url 连接远程仓库（貌似只需要首次添加即可）
 >
 >4. $git push origin master 创建master分支
 
