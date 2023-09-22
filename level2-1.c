@@ -4,7 +4,7 @@
 #include<math.h>
 
 struct node {
-	int st,en;
+	int st,en,tm;
 }a[1005];
 
 
@@ -48,25 +48,26 @@ int gt(int x) {
 		return a[x].en;	
 }
 
-int fd(int x,int dic,int cap) {
+int fd(int x,int dic,int cap,int tcnt) {
 	int k;
 	for (k=1; k<=n; k++)
 		if (a[k].en == x && b[k] == 1)
 			return k;
 	for (k=1; k<=n; k++)
-		if (cap < 4 && a[k].st == x && b[k] == 0)
+		if (cap < 4 && a[k].st == x && b[k] == 0 && cap * (a[k].tm - tcnt) <= 10)
 			return k;
 	return -1;
 }
 
 int main() {
-	printf("please input the number of the passenger\n");
-	scanf("%d",&n);
-	printf("please input the start floor and the ending floor for every passenger\n");
-	for (i=1; i<=n; i++)
-		scanf("%d%d",&a[i].st,&a[i].en);
 	printf("please input the position of the lift\n");
 	scanf("%d",&est);
+	printf("please input the number of the passenger\n");
+	scanf("%d",&n);
+	printf("please input the start floor, the ending floor and the time for every passenger\n");
+	for (i=1; i<=n; i++)
+		scanf("%d%d%d",&a[i].st,&a[i].en,&a[i].tm);
+	
 	puts("");
 	printf("the route of the lift is written as follow:\n");
 	dic = 1; cnt = (n << 1);
@@ -82,7 +83,7 @@ int main() {
 	int tcnt = -1;
 	for (; cnt; est += dic) {
 		tcnt ++;
-		int resl = fd(est,dic,cap);
+		int resl = fd(est,dic,cap,tcnt);
 		while (resl != -1) {
 			if (b[resl] == 1) {
 				b[resl] = 2;
@@ -94,9 +95,11 @@ int main() {
 					continue;
 				cap++; cnt--;
 				b[resl] = 1;
+				if (a[resl].tm > tcnt)
+					tcnt = a[resl].tm;
 				printf("%d %d %d\n",est,tcnt,cap); 
 			}
-			resl = fd(est,dic,cap);
+			resl = fd(est,dic,cap,tcnt);
 		}
 		maxx = s_maxx();
 		minn = s_minn(); 
