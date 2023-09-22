@@ -71,7 +71,7 @@ int main() {
 	puts("");
 	printf("the route of the lift is written as follow:\n");
 	dic = 1; cnt = (n << 1);
-	printf("%d %d %d\n",est,0,0);
+	printf("position:%d time:%d loads:%d\n",est,0,0);
 	
 	
 	maxx = s_maxx();
@@ -88,7 +88,7 @@ int main() {
 			if (b[resl] == 1) {
 				b[resl] = 2;
 				cnt--; cap--;
-				printf("%d %d %d\n",est,tcnt,cap);
+				printf("position:%d time:%d loads:%d\n",est,tcnt,cap);
 			}
 			if (b[resl] == 0) {
 				if (cap == 4)
@@ -97,7 +97,7 @@ int main() {
 				b[resl] = 1;
 				if (a[resl].tm > tcnt)
 					tcnt = a[resl].tm;
-				printf("%d %d %d\n",est,tcnt,cap); 
+				printf("position:%d time:%d loads:%d\n",est,tcnt,cap); 
 			}
 			resl = fd(est,dic,cap,tcnt);
 		}
